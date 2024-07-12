@@ -81,7 +81,7 @@ def main() -> None:
             for i, percent in enumerate(percents, start=1)
         ]
         message = (
-            f'❗Has percent that more than {PERCENT_NOTIFICATION}% ❗\n\n'
+            f'❗Has a percentage of over {PERCENT_NOTIFICATION}% ❗\n\n'
             f'Percents: \n{"\n".join(percent_text)}'
         )
         send_telegram_message(message=message)
