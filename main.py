@@ -2,6 +2,8 @@ import os
 import time
 import asyncio
 
+from pytz import timezone
+
 import schedule
 
 from selenium import webdriver
@@ -23,7 +25,6 @@ load_dotenv()
 
 
 PERCENT_NOTIFICATION = 98
-SCHEDULE_INTERVAL_IN_MINUTES = 3
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 
@@ -90,7 +91,10 @@ def main() -> None:
 
 if __name__ == '__main__':
     try:
-        schedule.every(SCHEDULE_INTERVAL_IN_MINUTES).minutes.do(main)
+        cet = timezone('CET')
+        schedule.every().day.at("08:00").do(main)
+        schedule.every().day.at("20:00").do(main)
+
         while True:
             schedule.run_pending()
             time.sleep(1)
